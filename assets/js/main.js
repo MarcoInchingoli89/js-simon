@@ -27,14 +27,21 @@ divElement.className = ('numbers');
 /* console.log(numberElement); */
 //Lo inserisco nel container
 simonContainer.append(divElement);
-//Creo i 5 numeri casuali e li salvo in una variabile
-const randomNumbers = Math.floor(Math.random() * 100);
+//Inserisco un numero casuale in una variabile
+let generateRandomNumbers = () => Math.floor(Math.random() * 100);
+const randomNumbers = generateRandomNumbers();
 /* console.log(randomNumbers); */
 //Seleziono la classe "numbers"
 const numbersElement = document.querySelector('.numbers');
 /* console.log(numbersElement); */
 //Inserisco i numeri all'interno di "numbers"
-numbersElement.innerText = randomNumbers;
-console.log(numbersElement)
 //Stampo l'elemento con i numeri in pagina
+numbersElement.innerText = randomNumbers;
+console.log(numbersElement);
 
+/*Creo 5 numeri casuali e li stampo in pagina*/
+//Creo una variabile con un array vuoto
+
+//Devo aggiungere numeri casuali nell'array finché non arrivo a 5
+//Se c'è già un numero passa al prossimo, altrimenti esce dal blocco
+//Salviamo i 5 numeri in una variabile e li stampiamo in pagina
