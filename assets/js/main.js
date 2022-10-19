@@ -41,3 +41,19 @@ const numbersElement = document.querySelector('.numbers');
 //Stampo l'elemento con i numeri in pagina
 numbersElement.innerText = randomNumbers;
 console.log(numbersElement);
+
+//inseriamo un countdown su pagina di 30 secondi
+
+//Impostiamo la variabile dei secondi
+let seconds = 30;
+//Impostiamo un intervallo di tempo
+const intervalId = setInterval(() => {
+    document.querySelector('.timer').innerText = seconds;
+    if (seconds == 0) {
+        /* console.log(seconds); */
+        clearInterval(intervalId);
+    } else {
+        seconds --;
+    }
+
+}, 1000);
