@@ -11,6 +11,9 @@
 //math.random - math.floor
 //innerText
 //insertAdjacentHTML o append
+//array
+//Ciclo While
+//Ciclo If
 
 /* Istruzioni */
 //Visualizzare in pagina 5 numeri casuali
@@ -40,8 +43,24 @@ numbersElement.innerText = randomNumbers;
 console.log(numbersElement);
 
 /*Creo 5 numeri casuali e li stampo in pagina*/
-//Creo una variabile con un array vuoto
+//Creo una funzione per inserire i numeri nell'array
+generateNumbersArray(1, 100);
+function generateNumbersArray(min, max) {
+    //Creo una variabile con un array vuoto
+    const randomNumbersArray = [];
+    console.log(randomNumbersArray)
+    //Devo aggiungere numeri casuali nell'array finché non arrivo a 5
+    while (randomNumbersArray !== 5) {
+        generateRandomNumbers
+        if (!randomNumbersArray.includes(randomNumbers)) {
+            randomNumbersArray.push(randomNumbers);
+            console.log(randomNumbersArray)
+        }
+    }
+        return randomNumbersArray
+}
 
-//Devo aggiungere numeri casuali nell'array finché non arrivo a 5
-//Se c'è già un numero passa al prossimo, altrimenti esce dal blocco
+/* const randomNumbersArray = generateNumbersArray(1, 100);
+console.log(randomNumbersArray) */
+//Se è già incluso un numero passa al prossimo, altrimenti esce dal blocco
 //Salviamo i 5 numeri in una variabile e li stampiamo in pagina
