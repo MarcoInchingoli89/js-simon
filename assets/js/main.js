@@ -16,64 +16,66 @@
 //Ciclo If
 
 /* Istruzioni */
-//Visualizzare in pagina 5 numeri casuali
-
-//Creo in html un container
-//Seleziono il container e lo aggiungo ad una variabile
+// Seleziono il container e lo aggiungo ad una variabile
 const simonContainer = document.querySelector('.container');
-/* console.log(simonContainer); */
-//Creo in js un div e lo aggiungo ad una variabile
-const divElement = document.createElement('div');
-/* console.log(numberElement); */
-//Assegno la classe "numbers" al div
-divElement.className = ('numbers');
-/* console.log(numberElement); */
-//Lo inserisco nel container
-simonContainer.append(divElement);
-//Inserisco i 5 numeri casuali in una variabile
+
+// Creo un div e lo aggiungo ad una variabile
+const numbersElement = document.createElement('div');
+numbersElement.className = 'numbers';
+simonContainer.append(numbersElement);
+
+// Genero i 5 numeri casuali e li mostro all'utente
 const randomNumbers = Array.from({ length: 5 }, () => Math.floor(Math.random() * 100));
-console.log(randomNumbers);
-/* console.log(randomNumbers); */
-//Seleziono la classe "numbers"
-const numbersElement = document.querySelector('.numbers');
-/* console.log(numbersElement); */
-//Inserisco i numeri all'interno di "numbers"
-//Stampo l'elemento con i numeri in pagina
-numbersElement.innerText = randomNumbers;
-console.log(numbersElement);
+numbersElement.innerText = randomNumbers.join(', ');
 
-//inseriamo un countdown su pagina di 30 secondi e poi facciamo scomparire i numeri al termine
-
-//Impostiamo la variabile dei secondi
-let seconds = 30;
-//Impostiamo un intervallo di tempo da 30 a 0
+// Countdown di 5 secondi
+let seconds = 5;
 const intervalId = setInterval(() => {
-    document.querySelector('.timer').innerText = seconds;
-    if (seconds == 0) {
-        /* console.log(seconds); */
-        clearInterval(intervalId);
-        //Faccio scomparire i numeri al termine del timer
-        numbersElement.style.visibility = 'hidden';
-    } else {
+    const timer = document.querySelector('.timer');
+    if (seconds > 0) {
+        timer.innerText = seconds;
         seconds--;
+    } else {
+        clearInterval(intervalId);
+        timer.style.visibility = 'hidden';
+        numbersElement.style.visibility = 'hidden';
+        showInput();
     }
-
 }, 1000);
 
-//L'utente deve inserire uno alla volta i numeri visti in precedenza tramite prompt
-
-//Setto un timer per far comparire gli input dopo che sono scomparsi i numeri
-const userNumbers = setTimeout(inputNumbers, 32000)
-function inputNumbers() {
-    //Faccio comparire i cinque input per i numeri
-    for (let index = 0; index < 5; index++) {
-        const userNumber = Number(prompt('Simon dice: `Scrivi uno dei numeri appena scomparsi`'))
-        console.log(userNumber)
-    }    
+// Mostra gli input per i numeri all'utente
+function showInput() {
+    const inputContainer = document.querySelector('.input-container');
+    for (let i = 0; i < 5; i++) {
+        const input = document.createElement('input');
+        input.type = 'number';
+        inputContainer.append(input);
+    }
+    // Aggiungi il pulsante per inviare i numeri
+    const btnSubmit = document.createElement('button');
+    btnSubmit.innerText = 'Invia';
+    btnSubmit.addEventListener('click', checkNumbers);
+    inputContainer.append(btnSubmit);
 }
 
-//Dopo aver inserito i numeri il software dice quanti e quali numeri corretti sono stati inseriti
+// Controlla i numeri inseriti dall'utente
+function checkNumbers() {
+    const inputContainer = document.querySelector('.input-container');
+    const inputs = inputContainer.querySelectorAll('input');
+    const userNumbers = Array.from(inputs).map(input => Number(input.value));
+    console.log(userNumbers);
 
+    // Verifica quanti numeri sono stati indovinati
+    let count = 0;
+    let result = '';
+    for (let i = 0; i < userNumbers.length; i++) {
+        if (randomNumbers.includes(userNumbers[i])) {
+            count++;
+            result += userNumbers[i] + ' ';
+        }
+    }
 
-
-
+    // Mostra il risultato all'utente
+    const resultElement = document.querySelector('.result');
+    resultElement.innerText = `Hai indovinato ${count} numeri: ${result}`;
+}
